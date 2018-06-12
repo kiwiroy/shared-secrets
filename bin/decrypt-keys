@@ -4,12 +4,15 @@ SS_DIR=$(dirname $(dirname $0))
 source $SS_DIR/etc/shared-secrets.settings.bash
 source $SS_DIR/lib/shared-secrets.functions.bash
 
+if [ ! -e $VAULT/vault.tar.gz ]; then
+  message_exit "$VAULT/vault.tar.gz does not exist"
+fi
+
 tar -C $VAULT -xf $VAULT/vault.tar.gz
 
 # check if the private key exists... exit if not
 if [ ! -e $PRIVATE_PEM ] || [ ! -e $SYMMETRIC ]; then
-    echo "## '$PRIVATE_PEM' or '$SYMMETRIC' does not exist" >&2
-    exit 1;
+    message_exit " '$PRIVATE_PEM' or '$SYMMETRIC' does not exist"
 fi
 
 message "extracting and decrypting key files"
