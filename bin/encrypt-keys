@@ -1,0 +1,26 @@
+#!/bin/bash
+
+SS_DIR=$(dirname $(dirname $0))
+source $SS_DIR/etc/shared-secrets.settings.bash
+source $SS_DIR/lib/shared-secrets.functions.bash
+
+# check if the private key exists... exit if not
+if [ ! -e $PRIVATE_PEM ] || [ ! -e $PUBLIC_PEM ] || [ ! -d $TARGET_DIRECTORY ]; then
+    message_exit "## $PRIVATE_PEM, $PUBLIC_PEM or $TARGET_DIRECTORY does not exist"
+fi
+
+if [ -e $SYMMETRIC ]; then
+    message_exit "$SYMMETRIC exists did you mean to 'decrypt-keys'?"
+fi
+
+message "collecting keys..."
+mkdir -p $VAULT
+tar -C $TARGET_DIRECTORY --exclude .gitignore -cf - .                    | \
+    openssl enc -aes-256-cbc -salt -pass file:<(encrypt_sym_key_decrypt) | \
+    gzip > $VAULT/encrypted_keys.tar.gz
+
+tar -C $VAULT -cf $VAULT/vault.tar.gz symmetric.key.rsa encrypted_keys.tar.gz
+
+clean
+
+exit

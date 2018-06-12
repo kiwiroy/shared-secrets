@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SS_DIR=$(dirname $(dirname $0))
+source $SS_DIR/etc/shared-secrets.settings.bash
+source $SS_DIR/lib/shared-secrets.functions.bash
+
+mkdir -p $SS_DIR/etc/keys
+
+ssh-keygen -b 2048 -t rsa -f $PRIVATE_PEM
+ssh-keygen -e -m pkcs8 -f $PRIVATE_PEM > $PUBLIC_PEM
