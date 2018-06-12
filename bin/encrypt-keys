@@ -23,4 +23,10 @@ tar -C $VAULT -cf $VAULT/vault.tar.gz symmetric.key.rsa encrypted_keys.tar.gz
 
 clean
 
+message ""
+message "$VAULT/vault.tar.gz contains:"
+tar -ztf $VAULT/vault.tar.gz | sed -e "s/^/[$SCRIPT]         /"
+message ""
+message "It is safe to commit $VAULT/vault.tar.gz"
+
 exit

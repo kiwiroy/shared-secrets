@@ -34,7 +34,7 @@ function decrypt_sym_key
 
 function clean
 {
-    message "cleaning up..."
+    message "+ cleaning up..."
     tar -tf $VAULT/vault.tar.gz | {
 	    cd $VAULT && xargs rm
     }
