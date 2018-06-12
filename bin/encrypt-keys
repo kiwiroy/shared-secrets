@@ -25,7 +25,7 @@ clean
 
 message ""
 message "$VAULT/vault.tar.gz contains:"
-tar -ztf $VAULT/vault.tar.gz | sed -e "s/^/[$SCRIPT]         /"
+tar -ztf $VAULT/vault.tar.gz | sed -e "s/^/[$SCRIPT]         /g"
 message ""
 message "It is safe to commit $VAULT/vault.tar.gz"
 
