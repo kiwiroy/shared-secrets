@@ -1,0 +1,11 @@
+## -*- mode: perl; -*-
+## process with cpanm --installdeps .
+requires 'Applify'                   => '0.14';
+requires 'Archive::Tar'              => '0';
+requires 'Crypt::PK::RSA'            => '0';
+requires 'Crypt::CBC'                => '0';
+requires 'Data::Entropy::Algorithms' => '0';
+requires 'File::Path::Expand'        => '0';
+requires 'IO::String'                => '0';
+requires 'Mojolicious'               => '7.50';
+requires 'PerlIO::gzip'              => '0';
