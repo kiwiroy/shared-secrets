@@ -8,7 +8,7 @@ if [ ! -e $VAULT/vault.tar.gz ]; then
   message_exit "$VAULT/vault.tar.gz does not exist"
 fi
 
-tar -C $VAULT -xf $VAULT/vault.tar.gz
+tar -C $VAULT -zxf $VAULT/vault.tar.gz
 
 # check if the private key exists... exit if not
 if [ ! -e $PRIVATE_PEM ] || [ ! -e $SYMMETRIC ]; then

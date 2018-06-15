@@ -19,7 +19,7 @@ tar -C $TARGET_DIRECTORY --exclude .gitignore -cf - .                    | \
     openssl enc -aes-256-cbc -salt -pass file:<(encrypt_sym_key_decrypt) | \
     gzip > $VAULT/encrypted_keys.tar.gz
 
-tar -C $VAULT -cf $VAULT/vault.tar.gz symmetric.key.rsa encrypted_keys.tar.gz
+tar -C $VAULT -zcf $VAULT/vault.tar.gz symmetric.key.rsa encrypted_keys.tar.gz
 
 clean
 
